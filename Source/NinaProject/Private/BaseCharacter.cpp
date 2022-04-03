@@ -504,3 +504,7 @@ void ABaseCharacter::BlinkMaterial() {
 		bIsHide = false;
 	}
 }
+
+void ABaseCharacter::SetCamera(UCameraComponent* inCamera) {
+	CurrentCamera = inCamera;
+}

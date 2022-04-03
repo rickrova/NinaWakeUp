@@ -239,4 +239,6 @@ public:
 		void HideNina(bool InValue);
 	UFUNCTION(BlueprintCallable, Category = "CodeFunction")
 		void BlinkMaterial();
+	UFUNCTION(BlueprintCallable, Category = "CodeFunction")
+		void SetCamera(UCameraComponent* inCamera);
 };
