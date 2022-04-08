@@ -8,6 +8,8 @@ UActorTagger::UActorTagger()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
+//este chavo
+
 void UActorTagger::BeginPlay()
 {
 	Super::BeginPlay();
