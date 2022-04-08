@@ -12,29 +12,12 @@ ABaseCharacter::ABaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	SetRootComponent((USceneComponent*)GetCapsuleComponent());
-	CameraSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraSpringArm"));
-	CameraSpringArm->SetupAttachment(GetRootComponent());
-	CameraSpringArm->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, 50.0f), FRotator(0.0f, 0.0f, 90.0f));
-	CameraSpringArm->bInheritPitch = false;
-	CameraSpringArm->bInheritYaw = false;
-	CameraSpringArm->bInheritRoll = false;
-	CameraSpringArm->TargetArmLength = 400.f;
-	CameraSpringArm->TargetOffset = FVector(0, 0, 40);
-	CameraSpringArm->bEnableCameraLag = true;
-	CameraSpringArm->CameraLagSpeed = 3.0f;
-	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Camera->SetupAttachment(CameraSpringArm, USpringArmComponent::SocketName);
-	CameraTopLimit = 80;
-	CameraBottomLimit = -15;
-	CameraSpeed = 6;
-	CurrentCamera = Camera;
 	ClimbFixPositionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("ClimbFixPositionTimeline"));
 	FixPositionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("FixPositionTimeline"));
 	FirstPersonCameraTransitionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("FirstPersonCameraTransitionTimeline"));
 	ZoomInCameraTransitionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("ZoomInCameraTransitionTimeline"));
 	TransparentTransitionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("TransparentTransitionTimeline"));
 
-	ZoomInCameraSpringArmLength = 145;
 	RayOffset = 25;
 	RayLength = 100;
 	FrontRayLength = 50;
@@ -65,14 +48,11 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	CameraSpringArm->SetAbsolute(false, true, true);
 	AnimInstance = (UHumanAnimInstance*)GetMesh()->GetAnimInstance();
 	GeneralMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(0), GeneralMaterial);
 	GetMesh()->SetMaterial(0, GeneralMaterial);
 	HairMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(1), HairMaterial);
 	GetMesh()->SetMaterial(1, HairMaterial);
-	InitialSpringArmLength = CameraSpringArm->TargetArmLength;
-	InitialSpringArmOffset = CameraSpringArm->GetRelativeTransform().GetLocation();
 	InitialWalkSpeed = GetCharacterMovement()->MaxWalkSpeed;
 
 	ClimbFixPositionCallback.BindUFunction(this, FName{ TEXT("ClimbFixPositionTimelineCallback") });
@@ -244,7 +224,6 @@ void ABaseCharacter::OnInteraction(FHitResult HitResult) {
 	FVector BoxOrigin;
 	FVector BoxExtent;
 	InteractiveActor->GetActorBounds(true, BoxOrigin, BoxExtent);
-	CameraSpringArm->SetWorldLocation(BoxOrigin);
 	bBased = true;
 	BaseActor = (ABaseMovableActor*)InteractiveActor;
 	FixPosition(&HitResult, false);
@@ -256,8 +235,6 @@ void ABaseCharacter::OnInteractionEnd() {
 	/*CameraSpringArm->AttachToComponent(GetRootComponent(),
 		FAttachmentTransformRules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false),
 		NAME_None);*/
-	CameraSpringArm->SetWorldLocation(GetActorLocation());
-	CameraSpringArm->SetRelativeLocation(InitialSpringArmOffset);
 	//DetachRootComponentFromParent(true);
 	/*AttachToComponent(Interactive->GetRootComponent(),
 		FAttachmentTransformRules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true), NAME_None);*/
@@ -283,8 +260,6 @@ void ABaseCharacter::ClimbFixPositionTimelineCallback() {
 	FRotator CurrentRotation = FMath::Lerp(InitialRotation, DesiredRotation, EaseInOutCurve->GetFloatValue(ClimbFixPositionTimeline->GetPlaybackPosition()));
 	SetActorRotation(CurrentRotation);
 	SetActorLocation(CurrentLocation);
-	CameraSpringArm->SetWorldLocation(FMath::Lerp(GetActorLocation() + InitialSpringArmOffset,
-		GetActorLocation() + ClimbOffset + InitialSpringArmOffset, EaseInOutCurve->GetFloatValue(ClimbFixPositionTimeline->GetPlaybackPosition())));
 	if (ClimbFixPositionTimeline->GetPlaybackPosition() >= ClimbFixPositionTimeline->GetTimelineLength()) {
 		//Do something on finish
 	}
@@ -310,7 +285,6 @@ void ABaseCharacter::OnClimbEnd() {
 	GetCharacterMovement()->GravityScale = 1;
 	ClimbFixPositionTimeline->Stop();
 	SetActorLocation(DesiredLocation + ClimbOffset);
-	CameraSpringArm->SetWorldLocation(GetActorLocation() + InitialSpringArmOffset);
 }
 
 void ABaseCharacter::OnGrab(FHitResult HitResult) {
@@ -348,12 +322,8 @@ void ABaseCharacter::SetFirstPersonCamera(bool InValue) {
 		bIsFirstPerson = InValue;
 		if (bIsFirstPerson) {
 			//InitialSpringArmLength = CameraSpringArm->TargetArmLength;
-			SpringArmRotationAfterFirstPersonCamera = CameraSpringArm->GetComponentRotation();
-			CameraSpringArm->bEnableCameraLag = false;
 		}
 		else {
-			SpringArmRotationAfterFirstPersonCamera = CameraSpringArm->GetComponentRotation();
-			CameraSpringArm->bEnableCameraLag = true;
 		}
 		/*FOnTimelineFloat Callback{};
 		Callback.BindUFunction(this, FName{ TEXT("FirstPersonCameraTimelineCallback") });*/
@@ -363,44 +333,35 @@ void ABaseCharacter::SetFirstPersonCamera(bool InValue) {
 
 void ABaseCharacter::FirstPersonCameraTimelineCallback() {
 	if (bIsFirstPerson) {
-		CameraSpringArm->TargetArmLength = FMath::Lerp(InitialSpringArmLength, 0.0f, EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition()));
-		CameraSpringArm->SetRelativeLocation(FMath::Lerp(InitialSpringArmOffset, FVector::ZeroVector, EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition())));
-		CameraSpringArm->SetRelativeRotation(FMath::Lerp(SpringArmRotationAfterFirstPersonCamera, GetActorForwardVector().Rotation(), EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition())));
 		GeneralMaterial->SetScalarParameterValue(FName("Alpha"), 1 - EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition()));
 		HairMaterial->SetScalarParameterValue(FName("Alpha"), 1 - EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition()));
 	}
 	else {
-		CameraSpringArm->TargetArmLength = FMath::Lerp(0.0f, InitialSpringArmLength, EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition()));
-		CameraSpringArm->SetRelativeLocation(FMath::Lerp(FVector::ZeroVector, InitialSpringArmOffset, EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition())));
-		CameraSpringArm->SetRelativeRotation(FMath::Lerp(SpringArmRotationAfterFirstPersonCamera, (GetActorForwardVector() - FVector::UpVector).Rotation(), EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition())));
 		GeneralMaterial->SetScalarParameterValue(FName("Alpha"), EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition()));
 		HairMaterial->SetScalarParameterValue(FName("Alpha"), EaseInOutCurve->GetFloatValue(FirstPersonCameraTransitionTimeline->GetPlaybackPosition()));
 	}
 }
 
 void ABaseCharacter::ZoomInCameraTimelineCallback() {
-	if (bZoomIn) {
+	if (bZoomIn) {/*
 		CameraSpringArm->TargetArmLength = FMath::Lerp(InitialSpringArmLength, ZoomInCameraSpringArmLength,
 			EaseInOutCurve->GetFloatValue(ZoomInCameraTransitionTimeline->GetPlaybackPosition()));
 		CameraSpringArm->SetRelativeLocation(FMath::Lerp(InitialSpringArmOffset, ZoomInCameraOffset,
-			EaseInOutCurve->GetFloatValue(ZoomInCameraTransitionTimeline->GetPlaybackPosition())));
+			EaseInOutCurve->GetFloatValue(ZoomInCameraTransitionTimeline->GetPlaybackPosition())));*/
 	}
-	else {
+	else {/*
 		CameraSpringArm->TargetArmLength = FMath::Lerp(ZoomInCameraSpringArmLength, InitialSpringArmLength,
 			EaseInOutCurve->GetFloatValue(ZoomInCameraTransitionTimeline->GetPlaybackPosition()));
 		CameraSpringArm->SetRelativeLocation(FMath::Lerp(ZoomInCameraOffset, InitialSpringArmOffset,
-			EaseInOutCurve->GetFloatValue(ZoomInCameraTransitionTimeline->GetPlaybackPosition())));
+			EaseInOutCurve->GetFloatValue(ZoomInCameraTransitionTimeline->GetPlaybackPosition())));*/
 	}
 }
 
 void ABaseCharacter::SetZoomInCamera() {
 	bZoomIn = true;
-	CameraTopLimit = 80;
-	CameraBottomLimit = -80;
-	CameraSpringArm->bEnableCameraLag = false;
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->MaxWalkSpeed = AimWalkSpeed;
-	CameraSpringArm->SetRelativeLocation(ZoomInCameraOffset);
+	//CameraSpringArm->SetRelativeLocation(ZoomInCameraOffset);
 	//InitialSpringArmLength = CameraSpringArm->TargetArmLength;
 	ZoomInCameraTransitionTimeline->PlayFromStart();
 	Zoom(true);
@@ -410,12 +371,9 @@ void ABaseCharacter::SetZoomOutCamera() {
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 1);
 	bZoomIn = false;
 	bAimGadget = false;
-	CameraTopLimit = 80;
-	CameraBottomLimit = -15;
-	CameraSpringArm->bEnableCameraLag = true;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->MaxWalkSpeed = InitialWalkSpeed;
-	CameraSpringArm->SetRelativeLocation(InitialSpringArmOffset);
+	//CameraSpringArm->SetRelativeLocation(InitialSpringArmOffset);
 	ZoomInCameraTransitionTimeline->PlayFromStart();
 	Zoom(false);
 }
@@ -485,10 +443,10 @@ void ABaseCharacter::GetCurvePosition() {
 	FCollisionShape CollisionShape;
 	CollisionShape.ShapeType = ECollisionShape::Sphere;
 
-	if (GetWorld()->SweepSingleByChannel(HitResult, Camera->GetComponentLocation(),
+	/*if (GetWorld()->SweepSingleByChannel(HitResult, Camera->GetComponentLocation(),
 		Camera->GetComponentLocation() + Camera->GetForwardVector() * 5000, FQuat::Identity, ECollisionChannel::ECC_Visibility, CollisionShape)) {
 		DrawDebugPoint(GetWorld(), HitResult.ImpactPoint, 10, FColor::Red, false, -1, 0);
-	}
+	}*/
 
 }
 
@@ -506,5 +464,11 @@ void ABaseCharacter::BlinkMaterial() {
 }
 
 void ABaseCharacter::SetCamera(UCameraComponent* inCamera) {
-	CurrentCamera = inCamera;
+	CameraTransitionYaw = GetActorRotation().Yaw;
+	if (!CurrentCamera) {
+		CurrentCamera = inCamera;
+	}
+	else {
+		PendingCamera = inCamera;
+	}
 }

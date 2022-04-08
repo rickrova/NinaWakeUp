@@ -96,10 +96,10 @@ void ABasePlayerController::CheckRotation() {
 
 void ABasePlayerController::MoveForward(float Value)
 {
-	ForwardMovement = BaseCharacter->CurrentCamera->GetForwardVector();
-	ForwardMovement.Z = 0;
-	ForwardMovement.Normalize();
-	ForwardMovement *= Value;	
+	ForwardMovement = FVector::CrossProduct(BaseCharacter->CurrentCamera->GetRightVector(), FVector::UpVector);
+	//ForwardMovement.Z = 0;
+	//ForwardMovement.Normalize();
+	ForwardMovement *= Value;
 
 	switch (InputState)
 	{
@@ -109,7 +109,7 @@ void ABasePlayerController::MoveForward(float Value)
 				BaseCharacter->BaseActor->AddForwardMovementInput(ForwardMovement);
 			}
 		}
-		else if(!BaseCharacter->GetController()->IsMoveInputIgnored()) {
+		else if (!BaseCharacter->GetController()->IsMoveInputIgnored()) {
 			BaseCharacter->GetCharacterMovement()->Velocity = FVector::UpVector * Value * 100;
 		}
 		break;
@@ -123,11 +123,11 @@ void ABasePlayerController::MoveForward(float Value)
 
 void ABasePlayerController::MoveRight(float Value)
 {
-	FVector CameraForward = BaseCharacter->CurrentCamera->GetForwardVector();
-	CameraForward.Z = 0;
-	CameraForward.Normalize();
-	RightMovement = -FVector::CrossProduct(CameraForward, FVector::UpVector);
-	RightMovement.Normalize();
+	//FVector CameraForward = BaseCharacter->CurrentCamera->GetForwardVector();
+	//CameraForward.Z = 0;
+	//CameraForward.Normalize();
+	RightMovement = BaseCharacter->CurrentCamera->GetRightVector();
+	//RightMovement.Normalize();
 	RightMovement *= Value;
 	switch (InputState)
 	{

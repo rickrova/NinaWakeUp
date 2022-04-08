@@ -35,20 +35,12 @@ public:
 	FVector InputVector;
 	FVector InitialSpringArmOffset;
 	float InitialSpringArmLength;
-	UCameraComponent* CurrentCamera;
 	bool bCameraTriggered;
 	bool bWakeUp;
 	bool bGrab;
 	bool bCameraReset;
+	UCameraComponent* CurrentCamera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool bFixedCamera;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		UCameraComponent* Camera;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		USpringArmComponent* CameraSpringArm;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		float ZoomInCameraSpringArmLength;
 	UPROPERTY(EditAnywhere)
 		float RayOffset;
 	UPROPERTY(EditAnywhere)
@@ -62,11 +54,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		float VerticalRayLength;
 	UPROPERTY(EditAnywhere)
-		float CameraTopLimit;
-	UPROPERTY(EditAnywhere)
-		float CameraBottomLimit;
-	UPROPERTY(EditAnywhere)
-		float CameraSpeed;
+		float CameraTransitionYawThreshold;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool bBased;
 	/*UPROPERTY(BlueprintReadOnly)
@@ -121,8 +109,8 @@ public:
 		bool bKO;
 
 
-
 protected:
+	UCameraComponent* PendingCamera;
 	UHumanAnimInstance* AnimInstance;
 	UTimelineComponent* ClimbFixPositionTimeline;
 	UTimelineComponent* FixPositionTimeline;
@@ -146,6 +134,7 @@ protected:
 	bool bClimbing;
 	FRotator InitialRotationRate;
 	float InitialWalkSpeed;
+	float CameraTransitionYaw;
 	bool bIsHide;
 	bool bUI;
 	bool bJetpackBoost;

@@ -61,10 +61,10 @@ void ANinaCharacter::Tick(float DeltaTime) {
 		Speed = BaseActor->GetVelocity().Size();
 		bReverse = BaseActor->bReverse;
 		DesiredPushAngle = BaseActor->Angle;
-		DesiredRotation = CameraSpringArm->GetComponentRotation();
-		DesiredRotation.Yaw = GetActorRotation().Yaw;
-		CameraSpringArm->SetWorldRotation(FMath::Lerp(CameraSpringArm->GetComponentRotation(),
-			DesiredRotation, DeltaTime * 5.0f));
+		//DesiredRotation = CameraSpringArm->GetComponentRotation();
+		//DesiredRotation.Yaw = GetActorRotation().Yaw;
+		//CameraSpringArm->SetWorldRotation(FMath::Lerp(CameraSpringArm->GetComponentRotation(),
+			//DesiredRotation, DeltaTime * 5.0f));
 		if (Speed > 0) {
 			CurrentPushAngle = FMath::Lerp(CurrentPushAngle, DesiredPushAngle * BaseActor->AngleDirection, DeltaTime * PushRotationSpeed);
 		}
@@ -76,10 +76,10 @@ void ANinaCharacter::Tick(float DeltaTime) {
 	}
 	else if (bGrab) {
 		Speed = GetVelocity().Size();
-		DesiredRotation = CameraSpringArm->GetComponentRotation();
-		DesiredRotation.Yaw = GetActorRotation().Yaw;
-		CameraSpringArm->SetWorldRotation(FMath::Lerp(CameraSpringArm->GetComponentRotation(),
-			DesiredRotation, DeltaTime * 5.0f));
+		//DesiredRotation = CameraSpringArm->GetComponentRotation();
+		//DesiredRotation.Yaw = GetActorRotation().Yaw;
+		//CameraSpringArm->SetWorldRotation(FMath::Lerp(CameraSpringArm->GetComponentRotation(),
+			//DesiredRotation, DeltaTime * 5.0f));
 	}
 	else if (bFloatUp) {
 		if (bRotatingLeft) {
@@ -109,30 +109,37 @@ void ANinaCharacter::Tick(float DeltaTime) {
 		}
 
 		if (Speed > 0) {
-			DesiredRotation = CameraSpringArm->GetComponentRotation();
+			//DesiredRotation = CameraSpringArm->GetComponentRotation();
 			if (FMath::Abs(GetActorRotation().Yaw - DesiredRotation.Yaw) < 170.0f) {
-				DesiredRotation.Yaw = GetActorRotation().Yaw;
-				DesiredRotation.Pitch = -25;
-				if (!bFixedCamera && !bZoomIn) {
-					CameraSpringArm->SetWorldRotation(FMath::Lerp(CameraSpringArm->GetComponentRotation(),
-						DesiredRotation, DeltaTime * CameraFollowThereshold));//1.8f));
-				}
+				//DesiredRotation.Yaw = GetActorRotation().Yaw;
+				//DesiredRotation.Pitch = -25;
+				//if (!bFixedCamera && !bZoomIn) {
+				//	CameraSpringArm->SetWorldRotation(FMath::Lerp(CameraSpringArm->GetComponentRotation(),
+				//		DesiredRotation, DeltaTime * CameraFollowThereshold));//1.8f));
+				//}
 			}
 		}
 		if (bCameraReset) {
-			DesiredRotation = CameraSpringArm->GetComponentRotation();
-			DesiredRotation.Yaw = GetActorRotation().Yaw;
-			DesiredRotation.Pitch = 0;
-			CameraSpringArm->SetWorldRotation(FMath::Lerp(CameraSpringArm->GetComponentRotation(),
-				DesiredRotation, DeltaTime * 10.0f));
-			if (FMath::Abs(DesiredRotation.Yaw - CameraSpringArm->GetComponentRotation().Yaw) < 0.5f) {
-				bCameraReset = false;
-			}
+			//DesiredRotation = CameraSpringArm->GetComponentRotation();
+			//DesiredRotation.Yaw = GetActorRotation().Yaw;
+			//DesiredRotation.Pitch = 0;
+			//CameraSpringArm->SetWorldRotation(FMath::Lerp(CameraSpringArm->GetComponentRotation(),
+				//DesiredRotation, DeltaTime * 10.0f));
+			//if (FMath::Abs(DesiredRotation.Yaw - CameraSpringArm->GetComponentRotation().Yaw) < 0.5f) {
+				//bCameraReset = false;
+			//}
 		}
 		FRotator NewRot = GetActorRotation();
 		NewRot.Roll = FMath::Lerp(NewRot.Roll, 0.0f, DeltaTime * 2.5f);
 		NewRot.Pitch = FMath::Lerp(NewRot.Pitch, 0.0f, DeltaTime * 2.5f);
 		SetActorRotation(NewRot);
+
+		if ((FMath::Abs(CameraTransitionYaw - GetActorRotation().Yaw) > CameraTransitionYawThreshold
+			|| GetVelocity().Size() == 0)
+			&& PendingCamera) {
+			CurrentCamera = PendingCamera;
+		}
+
 	}
 
 	if (!bFloatUp && JetpackEnergy < JetpackMaxEnergy) {
@@ -252,7 +259,7 @@ void ANinaCharacter::ResetMove() {
 	bPendingJump = false;
 	bJumping = false;
 	bClimbing = false;
-	CameraSpringArm->SetRelativeLocation(InitialSpringArmOffset);
+	//CameraSpringArm->SetRelativeLocation(InitialSpringArmOffset);
 	if (!bKO) {
 		GetController()->SetIgnoreMoveInput(false);
 	}
