@@ -39,6 +39,8 @@ public:
 	bool bWakeUp;
 	bool bGrab;
 	bool bCameraReset;
+
+	UPROPERTY(BlueprintReadOnly)
 	UCameraComponent* CurrentCamera;
 
 	UPROPERTY(EditAnywhere)
@@ -110,7 +112,8 @@ public:
 
 
 protected:
-	UCameraComponent* PendingCamera;
+	UPROPERTY(BlueprintReadOnly)
+		UCameraComponent* PendingCamera;
 	UHumanAnimInstance* AnimInstance;
 	UTimelineComponent* ClimbFixPositionTimeline;
 	UTimelineComponent* FixPositionTimeline;
