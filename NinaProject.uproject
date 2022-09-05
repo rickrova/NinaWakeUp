@@ -17,6 +17,22 @@
 		{
 			"Name": "PanoramicCapture",
 			"Enabled": true
+<<<<<<< Updated upstream
+=======
+		},
+		{
+			"Name": "Bridge",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Mac",
+				"Linux"
+			]
+		},
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true
+>>>>>>> Stashed changes
 		}
 	]
 }
