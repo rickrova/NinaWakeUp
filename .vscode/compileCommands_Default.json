@@ -1,0 +1,154 @@
+[
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/NinaProject.Build.cs",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/NinaProject.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/NinaProject.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/NinaProjectGameModeBase.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/NinaProjectGameModeBase.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Private/ActorTagger.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Private/BaseCharacter.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Private/BaseMovableActor.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Private/BasePlayerController.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Private/HumanAnimInstance.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Private/MyPawn.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Private/NinaCharacter.cpp",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Public/ActorTagger.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Public/BaseCharacter.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Public/BaseMovableActor.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Public/BasePlayerController.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Public/HumanAnimInstance.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Public/MyPawn.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	},
+	{
+		"file": "/Users/rick/Projects/Nina/Project/Source/NinaProject/Public/NinaCharacter.h",
+		"arguments": [
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/rick/Projects/Nina/Project/.vscode/compileCommands_Default/NinaProject.241.rsp"
+		],
+		"directory": "/Users/Shared/Epic Games/UE_5.1/Engine/Source"
+	}
+]

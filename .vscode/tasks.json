@@ -1,0 +1,720 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "NinaProject Mac Debug Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Debug Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject Mac Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Debug Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac DebugGame Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject Mac DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac DebugGame Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Development Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Development Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject Mac Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Development Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Test Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Test",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Test Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Test",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject Mac Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Test Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Test",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Shipping Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Shipping",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Shipping Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Shipping",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject Mac Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject Mac Shipping Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"Mac",
+				"Shipping",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Debug Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Debug Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject IOS Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Debug Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS DebugGame Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject IOS DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS DebugGame Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Development Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Development Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject IOS Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Development Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Test Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Test",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Test Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Test",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject IOS Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Test Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Test",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Shipping Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Shipping",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Shipping Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Shipping",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProject IOS Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProject IOS Shipping Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProject",
+				"IOS",
+				"Shipping",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac Debug Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac Debug Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProjectEditor Mac Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac Debug Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"Debug",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac DebugGame Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProjectEditor Mac DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac DebugGame Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"DebugGame",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac Development Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac Development Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"NinaProjectEditor Mac Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		},
+		{
+			"label": "NinaProjectEditor Mac Development Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"NinaProjectEditor",
+				"Mac",
+				"Development",
+				"/Users/rick/Projects/Nina/Project/NinaProject.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_5.1"
+			}
+		}
+	]
+}

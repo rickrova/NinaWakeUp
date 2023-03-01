@@ -17,6 +17,7 @@ ABaseCharacter::ABaseCharacter()
 	FirstPersonCameraTransitionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("FirstPersonCameraTransitionTimeline"));
 	ZoomInCameraTransitionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("ZoomInCameraTransitionTimeline"));
 	TransparentTransitionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("TransparentTransitionTimeline"));
+	CurrentCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("DefaultCamera"));
 
 	RayOffset = 25;
 	RayLength = 100;
@@ -78,7 +79,8 @@ void ABaseCharacter::Tick(float DeltaTime)
 	FVector StartTrace = GetActorLocation()
 		+ GetActorForwardVector().GetSafeNormal() * FrontRayOffset;
 	FVector FrontEndTrace = StartTrace + GetActorForwardVector().GetSafeNormal() * FrontRayLength;
-	FCollisionQueryParams TraceParams = FCollisionQueryParams::FCollisionQueryParams();
+	FCollisionQueryParams TraceParams = FCollisionQueryParams();
+
 	TraceParams.AddIgnoredActor(this);
 
 	if (GetWorld()->LineTraceSingleByChannel(*HitResult, StartTrace, FrontEndTrace, ECC_Visibility, TraceParams)) {
@@ -133,7 +135,7 @@ void ABaseCharacter::CheckFrontObject(EInputType InputType) {
 		FVector StartTrace = GetActorLocation()
 			+ GetActorForwardVector().GetSafeNormal() * FrontRayOffset;
 		FVector FrontEndTrace = StartTrace + GetActorForwardVector().GetSafeNormal() * FrontRayLength;
-		FCollisionQueryParams TraceParams = FCollisionQueryParams::FCollisionQueryParams();
+		FCollisionQueryParams TraceParams = FCollisionQueryParams();
 		TraceParams.AddIgnoredActor(this);
 		//DrawDebugLine(GetWorld(), StartTrace, FrontEndTrace, FColor(0, 255, 0), false);
 		//FCollisionShape CollisionShape = FCollisionShape::MakeBox(FVector(1, 1, 70));

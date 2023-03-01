@@ -242,6 +242,7 @@ void ABasePlayerController::Interaction() {
 	switch (InputState)
 	{
 	case EInputState::Character:
+		BaseCharacter->Interaction();
 		BaseCharacter->CheckFrontObject(EInputType::Interaction);
 		break;
 	}

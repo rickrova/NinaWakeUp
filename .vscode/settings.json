@@ -1,0 +1,20 @@
+{
+    "files.exclude": {
+        ".gitattributes": true,
+        ".gitignore": true,
+        ".ignore": true,
+        ".vscode": true,
+        "**/.png": true,
+        "AssetsvilleTown.png": true,
+        "Binaries": true,
+        "Config": true,
+        "Content": true,
+        "DerivedDataCache": true,
+        "Intermediate": true,
+        "NinaProject.code-workspace": true,
+        "NinaProject.png": true,
+        "NinaProject.uproject": true,
+        "NinaProject.xcworkspace": true,
+        "Saved": true
+    }
+}

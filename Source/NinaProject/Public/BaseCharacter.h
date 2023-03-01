@@ -176,6 +176,8 @@ public:
 	//void Use();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void Interaction();
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
 		void StartInteraction(AActor* InteractiveActor, FHitResult HitResult);
 	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
 		void EndInteraction();

@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.0",
+	"EngineAssociation": "5.1",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -11,28 +11,6 @@
 			"AdditionalDependencies": [
 				"Engine"
 			]
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "PanoramicCapture",
-			"Enabled": true
-<<<<<<< Updated upstream
-=======
-		},
-		{
-			"Name": "Bridge",
-			"Enabled": true,
-			"SupportedTargetPlatforms": [
-				"Win64",
-				"Mac",
-				"Linux"
-			]
-		},
-		{
-			"Name": "ModelingToolsEditorMode",
-			"Enabled": true
->>>>>>> Stashed changes
 		}
 	]
 }

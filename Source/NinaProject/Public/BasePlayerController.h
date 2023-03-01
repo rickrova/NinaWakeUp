@@ -52,31 +52,31 @@ protected:
 
 	EInputState InputState;
 
-		void BeginPlay();
-		void SetPawnDefaults();
-		void CheckRotation();
+	void BeginPlay();
+	void SetPawnDefaults();
+	void CheckRotation();
 
-		void MoveForward(float InValue);
-		void MoveRight(float InValue);
-		void PitchCamera(float AxisValue);
-		void YawCamera(float AxisValue);
+	void MoveForward(float InValue);
+	void MoveRight(float InValue);
+	void PitchCamera(float AxisValue);
+	void YawCamera(float AxisValue);
 
-		void UpSelection();
-		void DownSelection();
-		void RightSelection();
-		void LeftSelection();
-		void Accept();
-		void Cancel();
+	void UpSelection();
+	void DownSelection();
+	void RightSelection();
+	void LeftSelection();
+	void Accept();
+	void Cancel();
 
-		void Interaction();
-		void EndInteraction();
-		void Action();
-		void AlternativeMovement();
-		void AlternativeView();
-		void Aim();
-		void EndAim();
-		void Use();
+	void Interaction();
+	void EndInteraction();
+	void Action();
+	void AlternativeMovement();
+	void AlternativeView();
+	void Aim();
+	void EndAim();
+	void Use();
 
-		UFUNCTION(BlueprintCallable, Category = "CodeEvents")
-		void SwitchPause();
+	UFUNCTION(BlueprintCallable, Category = "CodeEvents")
+	void SwitchPause();
 };
