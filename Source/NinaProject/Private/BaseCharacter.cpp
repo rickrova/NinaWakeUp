@@ -18,6 +18,7 @@ ABaseCharacter::ABaseCharacter()
 	ZoomInCameraTransitionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("ZoomInCameraTransitionTimeline"));
 	TransparentTransitionTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("TransparentTransitionTimeline"));
 	CurrentCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("DefaultCamera"));
+	Inventory = CreateDefaultSubobject<UInventory>(TEXT("Inventory"));
 
 	RayOffset = 25;
 	RayLength = 100;

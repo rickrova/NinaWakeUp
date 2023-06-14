@@ -12,6 +12,7 @@ ANinaCharacter::ANinaCharacter() {
 	JumpVelocityFactor = 0.5f;
 	FallVelocityFactor = 0.25f;
 	CameraFollowThereshold = 3.0f;
+
 	//TimerDel = FTimerDelegate::CreateUObject(this, &ANinaCharacter::ResetJumpValues);
 	//TimerDel.BindUFunction(this, FName("ResetJumpValues"));
 }

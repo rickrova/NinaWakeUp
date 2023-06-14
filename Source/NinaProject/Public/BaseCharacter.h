@@ -8,6 +8,7 @@
 #include "Runtime/Engine/Classes/Camera/CameraComponent.h"
 #include "HumanAnimInstance.h"
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"
+#include "Inventory.h"
 #include "BaseCharacter.generated.h"
 
 UENUM(BlueprintType)
@@ -42,6 +43,8 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	UCameraComponent* CurrentCamera;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UInventory* Inventory;
 
 	UPROPERTY(EditAnywhere)
 		float RayOffset;
