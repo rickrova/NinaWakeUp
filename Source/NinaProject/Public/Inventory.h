@@ -5,15 +5,8 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "NWUHUD.h"
+#include "Item.h"
 #include "Inventory.generated.h"
-
-USTRUCT(BlueprintType)
-struct FItemMeta {
-	GENERATED_BODY()
-
-		UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		FName Name;
-};
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -25,7 +18,9 @@ public:
 	TArray<FItemMeta> Items;
 
 	UPROPERTY(BlueprintReadWrite)
-	ANWUHUD* HUD;
+		FItemMeta EquippedItem;
+	UPROPERTY(BlueprintReadWrite)
+		ANWUHUD* HUD;
 
 public:	
 	// Sets default values for this component's properties
@@ -39,5 +34,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void AddToInventory(FItemMeta inItem);
+	UFUNCTION(BlueprintCallable, Category = "CodeFunction")
+		void AddToInventory(FItemMeta inItem);
+	UFUNCTION(BlueprintCallable, Category = "CodeFunction")
+		void EquipItem(FItemMeta inItem);
 };

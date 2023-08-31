@@ -43,8 +43,6 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	UCameraComponent* CurrentCamera;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UInventory* Inventory;
 
 	UPROPERTY(EditAnywhere)
 		float RayOffset;

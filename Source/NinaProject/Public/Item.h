@@ -7,6 +7,26 @@
 #include "Components/SphereComponent.h"
 #include "Item.generated.h"
 
+USTRUCT(BlueprintType)
+struct FItemMeta {
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FText Name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FText Description;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UTexture2D* Image;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<UMeshComponent> MeshArchetype;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMesh* StaticMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USkeletalMesh* SkeletalMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TAssetPtr<UWorld> UnlockableLevel;
+};
+
 UCLASS()
 class NINAPROJECT_API AItem : public AActor
 {
@@ -19,7 +39,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* VisibleComponent;
 
-public:	
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FItemMeta MetaData;
+
 	// Sets default values for this actor's properties
 	AItem();
 
@@ -31,6 +54,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION()
-	void OnOverlapBegin(class UPrimitiveComponent* thisComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool FromSweep, const FHitResult& SweepResult);
+	//UFUNCTION()
+	//void OnOverlapBegin(class UPrimitiveComponent* thisComp,
+	//class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
+	//int32 OtherBodyIndex, bool FromSweep, const FHitResult& SweepResult);
 };

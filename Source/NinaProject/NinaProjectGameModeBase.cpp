@@ -3,3 +3,6 @@
 
 #include "NinaProjectGameModeBase.h"
 
+ANinaProjectGameModeBase::ANinaProjectGameModeBase() {
+	Inventory = CreateDefaultSubobject<UInventory>(TEXT("Inventerer"));
+}

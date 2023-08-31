@@ -3,6 +3,7 @@
 
 #include "Item.h"
 #include "NinaCharacter.h"
+#include "../NinaProjectGameModeBase.h"
 
 // Sets default values
 AItem::AItem()
@@ -14,6 +15,7 @@ AItem::AItem()
 	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
 	VisibleComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Visible"));
 
+	SetRootComponent(Root);
 	Collision->SetupAttachment(Root);
 	VisibleComponent->SetupAttachment(Root);
 }
@@ -23,7 +25,7 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	Collision->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnOverlapBegin);
+	//Collision->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnOverlapBegin);
 }
 
 // Called every frame
@@ -33,13 +35,18 @@ void AItem::Tick(float DeltaTime)
 
 }
 
-void AItem::OnOverlapBegin(class UPrimitiveComponent* thisComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool FromSweep, const FHitResult& SweepResult)
+/*void AItem::OnOverlapBegin(class UPrimitiveComponent* thisComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool FromSweep, const FHitResult& SweepResult)
 {
-	UInventory* inventory = Cast<ANinaCharacter>(OtherActor)->Inventory;
+	ANinaCharacter* Nina = Cast<ANinaCharacter>(OtherActor);
+	if (Nina) {
+		ANinaProjectGameModeBase* gmb = GetWorld()->GetAuthGameMode<ANinaProjectGameModeBase>();
+		UInventory* inventory = gmb->Inventory;
 
-	FItemMeta newItem;
-	newItem.Name = FName(TEXT("item"));
-	inventory->AddToInventory(newItem);
-	Destroy();
-}
+		FItemMeta newItem;
+		newItem.Name = FName(TEXT("item"));
+		inventory->AddToInventory(newItem);
+		//Destroy();
+	}
+
+}*/
 

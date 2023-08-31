@@ -25,6 +25,12 @@ void UInventory::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 
 void UInventory::AddToInventory(FItemMeta inItem) {
 	Items.Add(inItem);
-	HUD->UpdateInventory();
+	HUD->UpdateInventory(inItem);
+	//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, FString::Printf(TEXT("Inventory here!")));
+}
+
+void UInventory::EquipItem(FItemMeta inItem) {
+	//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, FString::Printf(TEXT("Equip now")));
+	EquippedItem = inItem;
 }
 

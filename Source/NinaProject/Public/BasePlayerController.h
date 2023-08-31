@@ -29,13 +29,17 @@ class NINAPROJECT_API ABasePlayerController : public APlayerController
 		float CameraTopLimit;
 		float CameraBottomLimit;
 		float AngleToRotationThereshold;
+		float ZoomDelta;
+		float RollDelta;
 		FVector2D CameraInput;
+		FVector2D Panning;
 		FVector DesiredDirection;
 		FVector RightMovement;
 		FVector ForwardMovement;
 		bool bCanMoveSelection;
 		bool bDiscreteVerticalInputSent;
 		bool bDiscreteHorizontalInputSent;
+		bool bAltZoomFunction = false;
 
 public:
 
@@ -51,6 +55,7 @@ public:
 protected:
 
 	EInputState InputState;
+	ANWUHUD* HUD;
 
 	void BeginPlay();
 	void SetPawnDefaults();
@@ -58,8 +63,11 @@ protected:
 
 	void MoveForward(float InValue);
 	void MoveRight(float InValue);
-	void PitchCamera(float AxisValue);
-	void YawCamera(float AxisValue);
+	void PanningHor(float InValue);
+	void PanningVert(float InValue);
+	void ZoomInItem(float AxisValue);
+	void ZoomOutItem(float AxisValue);
+	void AltTriggers();
 
 	void UpSelection();
 	void DownSelection();
@@ -73,10 +81,12 @@ protected:
 	void Action();
 	void AlternativeMovement();
 	void AlternativeView();
-	void Aim();
-	void EndAim();
+	void NextPage();
+	void PrevPage();
 	void Use();
 
 	UFUNCTION(BlueprintCallable, Category = "CodeEvents")
 	void SwitchPause();
+	UFUNCTION(BlueprintCallable, Category = "CodeEvents")
+		void SwitchMenu();
 };

@@ -19,18 +19,22 @@ void ABasePlayerController::BeginPlay() {
 
 	InputComponent->BindAxis("MoveForward", this, &ABasePlayerController::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ABasePlayerController::MoveRight);
-	InputComponent->BindAxis("CameraPitch", this, &ABasePlayerController::PitchCamera);
-	InputComponent->BindAxis("CameraYaw", this, &ABasePlayerController::YawCamera);
+	InputComponent->BindAxis("PanningHorizontal", this, &ABasePlayerController::PanningHor);
+	InputComponent->BindAxis("PanningVertical", this, &ABasePlayerController::PanningVert);
+	InputComponent->BindAxis("ZoomIn", this, &ABasePlayerController::ZoomInItem);
+	InputComponent->BindAxis("ZoomOut", this, &ABasePlayerController::ZoomOutItem);
 
 	InputComponent->BindAction("Interact", IE_Pressed, this, &ABasePlayerController::Interaction);
 	InputComponent->BindAction("Interact", IE_Released, this, &ABasePlayerController::EndInteraction);
 	InputComponent->BindAction("Action", IE_Pressed, this, &ABasePlayerController::Action);
 	InputComponent->BindAction("AlternativeMovement", IE_Pressed, this, &ABasePlayerController::AlternativeMovement);
 	InputComponent->BindAction("AlternativeView", IE_Pressed, this, &ABasePlayerController::AlternativeView);
-	InputComponent->BindAction("Aim", IE_Pressed, this, &ABasePlayerController::Aim);
-	InputComponent->BindAction("Aim", IE_Released, this, &ABasePlayerController::EndAim);
+	InputComponent->BindAction("NextPage", IE_Pressed, this, &ABasePlayerController::NextPage);
+	InputComponent->BindAction("PrevPage", IE_Pressed, this, &ABasePlayerController::PrevPage);
 	InputComponent->BindAction("Use", IE_Pressed, this, &ABasePlayerController::Use);
+	InputComponent->BindAction("AltTriggers", IE_Pressed, this, &ABasePlayerController::AltTriggers);
 	InputComponent->BindAction("Pause", IE_Pressed, this, &ABasePlayerController::SwitchPause).bExecuteWhenPaused = true;
+	InputComponent->BindAction("Menu", IE_Pressed, this, &ABasePlayerController::SwitchMenu).bExecuteWhenPaused = false;
 
 	InputComponent->BindAction("UpSelection", IE_Pressed, this, &ABasePlayerController::UpSelection).bExecuteWhenPaused = true;
 	InputComponent->BindAction("DownSelection", IE_Pressed, this, &ABasePlayerController::DownSelection).bExecuteWhenPaused = true;
@@ -44,6 +48,7 @@ void ABasePlayerController::BeginPlay() {
 	bDiscreteVerticalInputSent = true;
 
 	SetInputState(EInputState::Character);
+	HUD = Cast<ANWUHUD>(GetHUD());
 }
 
 void ABasePlayerController::SetPawnDefaults() {
@@ -118,6 +123,9 @@ void ABasePlayerController::MoveForward(float Value)
 			BaseCharacter->BaseActor->AddForwardMovementInput(ForwardMovement);
 		}
 		break;
+	case EInputState::UI:
+		HUD->Vertical(-Value);
+		break;
 	}
 }
 
@@ -151,28 +159,71 @@ void ABasePlayerController::MoveRight(float Value)
 			BaseCharacter->BaseActor->AddRightMovementInput(RightMovement);
 		}
 		break;
+	case EInputState::UI:
+		HUD->Horizontal(-Value);
+		break;
 	}
 }
 
-void ABasePlayerController::PitchCamera(float AxisValue)
+void ABasePlayerController::PanningHor(float AxisValue)
 {
-	// CameraInput.Y = AxisValue * BaseCharacter->CameraSpeed * YAxisDirection;
-	// FRotator NewRotation = BaseCharacter->CameraSpringArm->GetComponentRotation();
-	// NewRotation.Pitch = FMath::Clamp(NewRotation.Pitch + CameraInput.Y, -CameraTopLimit, -CameraBottomLimit);
-	// BaseCharacter->CameraSpringArm->SetWorldRotation(NewRotation);
+	switch (InputState)
+	{
+	case EInputState::UI:
+			Panning.X = AxisValue;
+		break;
+	}
+}
+void ABasePlayerController::PanningVert(float AxisValue)
+{
+	switch (InputState)
+	{
+	case EInputState::UI:
+			Panning.Y = AxisValue;
+			HUD->PanItem(Panning);
+		break;
+	}
 }
 
-void ABasePlayerController::YawCamera(float AxisValue)
+void ABasePlayerController::ZoomInItem(float AxisValue)
 {
-	// CameraInput.X = AxisValue * BaseCharacter->CameraSpeed;
-	// FRotator NewRotation = BaseCharacter->CameraSpringArm->GetComponentRotation();
-	// NewRotation.Yaw = NewRotation.Yaw + CameraInput.X;
-	// BaseCharacter->CameraSpringArm->SetWorldRotation(NewRotation);
-	// if (InputState == EInputState::Aim) {
-	// 	FRotator NewCharacterRotation = BaseCharacter->GetActorRotation();
-	// 	NewCharacterRotation.Yaw = NewRotation.Yaw; 
-	// 	BaseCharacter->SetActorRotation(FMath::Lerp(BaseCharacter->GetActorRotation(), NewCharacterRotation, GetWorld()->DeltaTimeSeconds * 10));
-	// }
+	switch (InputState)
+	{
+		case EInputState::UI:
+			if (bAltZoomFunction) {
+				RollDelta = AxisValue;
+			}
+			else {
+				ZoomDelta = AxisValue;
+			}
+			break;
+	}
+}
+void ABasePlayerController::ZoomOutItem(float AxisValue)
+{
+	switch (InputState)
+	{
+	case EInputState::UI:
+		if (bAltZoomFunction) {
+			RollDelta += AxisValue;
+			HUD->RollItem(RollDelta);
+		}
+		else {
+			ZoomDelta += AxisValue;
+			HUD->ZoomItem(ZoomDelta);
+		}
+		break;
+	}
+}
+
+void ABasePlayerController::AltTriggers()
+{
+	switch (InputState)
+	{
+	case EInputState::UI:
+		bAltZoomFunction = !bAltZoomFunction;
+		break;
+	}
 }
 
 void ABasePlayerController::UpSelection() {
@@ -182,7 +233,7 @@ void ABasePlayerController::UpSelection() {
 		//Terminal->Up();
 		break;
 	case EInputState::UI:
-		BaseCharacter->UpSelection();
+		HUD->Up();
 		break;
 	}
 }
@@ -194,7 +245,7 @@ void ABasePlayerController::DownSelection() {
 		//Terminal->Down();
 		break;
 	case EInputState::UI:
-		BaseCharacter->DownSelection();
+		HUD->Down();
 		break;
 	}
 }
@@ -205,6 +256,9 @@ void ABasePlayerController::RightSelection() {
 	case EInputState::Terminal:
 		//Terminal->Right();
 		break;
+	case EInputState::UI:
+		HUD->Right();
+		break;
 	}
 }
 
@@ -213,6 +267,9 @@ void ABasePlayerController::LeftSelection() {
 	{
 	case EInputState::Terminal:
 		//Terminal->Left();
+		break;
+	case EInputState::UI:
+		HUD->Left();
 		break;
 	}
 }
@@ -224,7 +281,7 @@ void ABasePlayerController::Accept() {
 		//Terminal->Enter();
 		break;
 	case EInputState::UI:
-		BaseCharacter->AcceptSelection();
+		HUD->Accept();
 		break;
 	}
 }
@@ -234,6 +291,9 @@ void ABasePlayerController::Cancel() {
 	{
 	case EInputState::Terminal:
 		//Terminal->Cancel();
+		break;
+	case EInputState::UI:
+		HUD->Cancel();
 		break;
 	}
 }
@@ -284,22 +344,20 @@ void ABasePlayerController::AlternativeView() {
 	}
 }
 
-void ABasePlayerController::Aim() {
+void ABasePlayerController::NextPage() {
 	switch (InputState)
 	{
-	case EInputState::Character:
-		BaseCharacter->SetZoomInCamera();
-		SetInputState(EInputState::Aim);
+	case EInputState::UI:
+		HUD->NextPage();
 		break;
 	}
 }
 
-void ABasePlayerController::EndAim() {
+void ABasePlayerController::PrevPage() {
 	switch (InputState)
 	{
-	case EInputState::Aim:
-		BaseCharacter->SetZoomOutCamera();
-		SetInputState(EInputState::Character);
+	case EInputState::UI:
+		HUD->PrevPage();
 		break;
 	}
 }
@@ -316,16 +374,45 @@ void ABasePlayerController::Use() {
 
 void ABasePlayerController::SwitchPause() {
 	if (bIsPaused) {
+		HUD->SwitchPanelVisibility(9, 6);
+		SetInputState(EInputState::Character);
 		bIsPaused = false;
 		SetPause(false);
-		SetInputState(EInputState::Character);
 		BaseCharacter->Pause(false);
 	}
 	else {
+		if (InputState == EInputState::UI) {
+			HUD->SwitchPanelVisibility(6, 5);
+			HUD->SwitchPanelVisibility(6, 10);
+			HUD->SwitchPanelVisibility(6, 11);
+			HUD->CloseInspectMesh();
+		}
+		else {
+			HUD->SwitchPanelVisibility(6, 9);
+		}
+		SetInputState(EInputState::UI);
 		bIsPaused = true;
 		SetPause(true);
-		SetInputState(EInputState::UI);
 		BaseCharacter->Pause(true);
+	}
+}
+
+void ABasePlayerController::SwitchMenu() {
+	if (InputState == EInputState::UI) {
+		if (bIsPaused) {
+			SwitchPause();
+		}
+		else {
+			HUD->SwitchPanelVisibility(9, 5);
+			HUD->SwitchPanelVisibility(9, 10);
+			HUD->SwitchPanelVisibility(9, 11);
+			HUD->CloseInspectMesh();
+			SetInputState(EInputState::Character);
+		}
+	}
+	else {
+		HUD->SwitchPanelVisibility(5, 9);
+		SetInputState(EInputState::UI);
 	}
 }
 
