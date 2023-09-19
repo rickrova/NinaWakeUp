@@ -36,10 +36,10 @@ private:
 	USceneComponent* Root;
 	UPROPERTY(EditAnywhere)
 	USphereComponent* Collision;
-	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* VisibleComponent;
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* VisibleComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FItemMeta MetaData;
 

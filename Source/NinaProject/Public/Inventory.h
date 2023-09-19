@@ -15,6 +15,8 @@ class NINAPROJECT_API UInventory : public UActorComponent
 	GENERATED_BODY()
 
 public:
+
+	UPROPERTY(BlueprintReadWrite)
 	TArray<FItemMeta> Items;
 
 	UPROPERTY(BlueprintReadWrite)
