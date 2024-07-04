@@ -27,6 +27,8 @@ void ABasePlayerController::BeginPlay() {
 	InputComponent->BindAction("Interact", IE_Pressed, this, &ABasePlayerController::Interaction);
 	InputComponent->BindAction("Interact", IE_Released, this, &ABasePlayerController::EndInteraction);
 	InputComponent->BindAction("Action", IE_Pressed, this, &ABasePlayerController::Action);
+	InputComponent->BindAction("AimThrow", IE_Pressed, this, &ABasePlayerController::AimCode);
+	InputComponent->BindAction("AimThrow", IE_Released, this, &ABasePlayerController::ThrowCode);
 	InputComponent->BindAction("AlternativeMovement", IE_Pressed, this, &ABasePlayerController::AlternativeMovement);
 	InputComponent->BindAction("AlternativeView", IE_Pressed, this, &ABasePlayerController::AlternativeView);
 	InputComponent->BindAction("NextPage", IE_Pressed, this, &ABasePlayerController::NextPage);
@@ -106,6 +108,7 @@ void ABasePlayerController::MoveForward(float Value)
 	//ForwardMovement.Normalize();
 	ForwardMovement *= Value;
 
+	HUD->MoveCursorVertical(-Value);
 	switch (InputState)
 	{
 	case EInputState::Character:
@@ -119,8 +122,17 @@ void ABasePlayerController::MoveForward(float Value)
 		}
 		break;
 	case EInputState::Aim:
-		if (BaseCharacter->bBased) {
-			BaseCharacter->BaseActor->AddForwardMovementInput(ForwardMovement);
+		if (!BaseCharacter->bBased) {
+			float deltaTime = GetWorld()->DeltaTimeSeconds;
+			float clampStrenght = 5.f * FMath::Abs(Value);
+			BaseCharacter->ThrowForce += Value * deltaTime * 0.5f;
+			//BaseCharacter->ThrowForce = FMath::Clamp(BaseCharacter->ThrowForce, 0.1f, 0.75f);
+			if (BaseCharacter->ThrowForce < 0.15f) {
+				BaseCharacter->ThrowForce = FMath::Lerp(BaseCharacter->ThrowForce, 0.15f, deltaTime * clampStrenght);
+			}
+			else if (BaseCharacter->ThrowForce > 0.6f) {
+				BaseCharacter->ThrowForce = FMath::Lerp(BaseCharacter->ThrowForce, 0.6f, deltaTime * clampStrenght);
+			}
 		}
 		break;
 	case EInputState::UI:
@@ -137,6 +149,8 @@ void ABasePlayerController::MoveRight(float Value)
 	RightMovement = BaseCharacter->CurrentCamera->GetRightVector();
 	//RightMovement.Normalize();
 	RightMovement *= Value;
+
+	HUD->MoveCursorHorizontal(Value);
 	switch (InputState)
 	{
 	case EInputState::Character:
@@ -152,11 +166,8 @@ void ABasePlayerController::MoveRight(float Value)
 		break;
 	case EInputState::Aim:
 		if (!BaseCharacter->bBased) {
-			CheckRotation();
-		}
-		else {
-			BaseCharacter->DesiredDirection = ForwardMovement + RightMovement;
-			BaseCharacter->BaseActor->AddRightMovementInput(RightMovement);
+			FRotator deltaRotator = FRotator(0, Value, 0);
+			GetCharacter()->AddActorLocalRotation(deltaRotator);
 		}
 		break;
 	case EInputState::UI:
@@ -235,6 +246,10 @@ void ABasePlayerController::UpSelection() {
 	case EInputState::UI:
 		HUD->Up();
 		break;
+	case EInputState::Character:
+		UpOrder();
+		break;
+
 	}
 }
 
@@ -246,6 +261,9 @@ void ABasePlayerController::DownSelection() {
 		break;
 	case EInputState::UI:
 		HUD->Down();
+		break;
+	case EInputState::Character:
+		DownOrder();
 		break;
 	}
 }
@@ -259,6 +277,9 @@ void ABasePlayerController::RightSelection() {
 	case EInputState::UI:
 		HUD->Right();
 		break;
+	case EInputState::Character:
+		RightOrder();
+		break;
 	}
 }
 
@@ -270,6 +291,9 @@ void ABasePlayerController::LeftSelection() {
 		break;
 	case EInputState::UI:
 		HUD->Left();
+		break;
+	case EInputState::Character:
+		LeftOrder();
 		break;
 	}
 }
@@ -324,6 +348,17 @@ void ABasePlayerController::Action() {
 		BaseCharacter->CheckFrontObject(EInputType::Action);
 		break;
 	}
+}
+
+void ABasePlayerController::AimCode() {
+	BaseCharacter->ThrowForce = 0.5f;
+	InputState = EInputState::Aim;
+	Aim();
+}
+
+void ABasePlayerController::ThrowCode() {
+	InputState = EInputState::Character;
+	Throw();
 }
 
 void ABasePlayerController::AlternativeMovement() {

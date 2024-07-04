@@ -50,4 +50,8 @@ public:
 		void RollItem(float Value);
 	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
 		void PanItem(FVector2D Value);
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void MoveCursorVertical(float Value);
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void MoveCursorHorizontal(float Value);
 };

@@ -110,6 +110,8 @@ public:
 		bool bInvincible;
 	UPROPERTY(BlueprintReadWrite)
 		bool bKO;
+	UPROPERTY(BlueprintReadOnly)
+		float ThrowForce;
 
 
 protected:

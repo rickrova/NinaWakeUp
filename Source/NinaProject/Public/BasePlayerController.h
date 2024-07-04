@@ -79,6 +79,8 @@ protected:
 	void Interaction();
 	void EndInteraction();
 	void Action();
+	void AimCode();
+	void ThrowCode();
 	void AlternativeMovement();
 	void AlternativeView();
 	void NextPage();
@@ -86,7 +88,19 @@ protected:
 	void Use();
 
 	UFUNCTION(BlueprintCallable, Category = "CodeEvents")
-	void SwitchPause();
+		void SwitchPause();
 	UFUNCTION(BlueprintCallable, Category = "CodeEvents")
 		void SwitchMenu();
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void Aim();
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void Throw();
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void UpOrder();
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void RightOrder();
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void DownOrder();
+	UFUNCTION(BlueprintImplementableEvent, Category = "CodeEvents")
+		void LeftOrder();
 };

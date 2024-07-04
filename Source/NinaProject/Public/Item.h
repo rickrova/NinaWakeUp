@@ -34,10 +34,10 @@ class NINAPROJECT_API AItem : public AActor
 private:
 	UPROPERTY(EditAnywhere)
 	USceneComponent* Root;
-	UPROPERTY(EditAnywhere)
-	USphereComponent* Collision;
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USphereComponent* Collision;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UStaticMeshComponent* VisibleComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

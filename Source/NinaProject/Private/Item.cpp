@@ -15,9 +15,9 @@ AItem::AItem()
 	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
 	VisibleComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Visible"));
 
-	SetRootComponent(Root);
-	Collision->SetupAttachment(Root);
-	VisibleComponent->SetupAttachment(Root);
+	SetRootComponent(Collision);
+	//Collision->SetupAttachment(Root);
+	VisibleComponent->SetupAttachment(Collision);
 }
 
 // Called when the game starts or when spawned
